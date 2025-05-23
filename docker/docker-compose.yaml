@@ -12,7 +12,6 @@ services:
       - "8889:8889"   # Prometheus metrics
     depends_on:
       - tempo
-      - jaeger
       - loki
       - prometheus
       
@@ -42,8 +41,6 @@ services:
     volumes:
       - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
 
-
-
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -55,7 +52,9 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning
     depends_on:
       - prometheus
-      - jaeger
+      - tempo
+      - loki
+
 
 volumes:
   grafana-storage:
