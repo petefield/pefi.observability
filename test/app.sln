@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app", "app.csproj", "{4195E981-2360-7259-32C6-BB2CA129A715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pefi.observability", "..\pefi.observability\pefi.observability.csproj", "{89342835-EA36-42D6-8BCB-4D507EA60FB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4195E981-2360-7259-32C6-BB2CA129A715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4195E981-2360-7259-32C6-BB2CA129A715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4195E981-2360-7259-32C6-BB2CA129A715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4195E981-2360-7259-32C6-BB2CA129A715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89342835-EA36-42D6-8BCB-4D507EA60FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89342835-EA36-42D6-8BCB-4D507EA60FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89342835-EA36-42D6-8BCB-4D507EA60FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89342835-EA36-42D6-8BCB-4D507EA60FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3511BF6-5EA7-42CF-A1D3-F7FB9ABED626}
+	EndGlobalSection
+EndGlobal

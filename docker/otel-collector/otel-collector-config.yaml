@@ -1,0 +1,43 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: "0.0.0.0:4317"
+      http:
+        endpoint: "0.0.0.0:4318"
+
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 1000
+  memory_limiter:
+    check_interval: 2s
+    limit_mib: 4000
+    spike_limit_mib: 800
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+  otlp/jaeger:
+    endpoint: jaeger:4317    # or your Jaeger endpoint
+    tls:
+      insecure: true  # Set this to false if using TLS
+  loki:
+    endpoint: "http://loki:3100/loki/api/v1/push"
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp/jaeger, debug]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [prometheus]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [debug]
