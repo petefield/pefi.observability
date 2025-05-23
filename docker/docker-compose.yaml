@@ -18,20 +18,12 @@ services:
       
   tempo:
     image: grafana/tempo:latest
+    container_name: tempo
+    ports:
+      - "3200:3200" # Tempo UI
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
       - ./tempo/tempo.yaml:/etc/tempo.yaml
-
-  jaeger:
-    image: jaegertracing/all-in-one:1.54
-    container_name: jaeger
-    restart: unless-stopped
-    environment:
-      - COLLECTOR_OTLP_ENABLED=true
-    ports:
-      - "16686:16686"  # Jaeger UI
-      - "6831:6831/udp"  # Jaeger agent (optional)
-      - "9411:9411"    # Zipkin-compatible endpoint (optiona
 
   loki:
     image: grafana/loki:latest
@@ -50,9 +42,13 @@ services:
     volumes:
       - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
 
+
+
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
+    environment:
+      - GF_FEATURE_TOGGLES_ENABLE=tempoSearch tempoBackendSearch
     ports:
       - "3000:3000"
     volumes:
