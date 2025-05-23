@@ -18,12 +18,15 @@ processors:
 exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
+
   otlp/tempo:
-    endpoint: "tempo:4317"
+    endpoint: "tempo:9095"
     tls:
       insecure: true
+
   loki:
     endpoint: "http://loki:3100/loki/api/v1/push"
+
   debug:
     verbosity: detailed
 
