@@ -13,7 +13,7 @@ var app = builder.Build();
 app.MapGet("/", async (ILogger<Program> logger, IHttpClientFactory httpClientFactory) => {
     logger.LogInformation("Hello from OpenTelemetry + Loki! v2 {name}", Guid.NewGuid());
     var c = httpClientFactory.CreateClient();
-    var r = await c.GetAsync("https://www.google.com");
+    var r = await c.GetAsync("http://localhost:5136/weatherforecast");
     return "Hello from OpenTelemetry!";
 });
 

@@ -18,6 +18,10 @@ processors:
 exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
+  otlp/tempo:
+    endpoint: "tempo:4317"
+    tls:
+      insecure: true
   otlp/jaeger:
     endpoint: jaeger:4317    # or your Jaeger endpoint
     tls:
@@ -32,7 +36,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [otlp/jaeger, debug]
+      exporters: [otlp/jaeger, otlp/tempo, debug]
     metrics:
       receivers: [otlp]
       processors: [memory_limiter, batch]

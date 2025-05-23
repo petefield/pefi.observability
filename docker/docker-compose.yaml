@@ -10,6 +10,17 @@ services:
       - "4317:4317"   # OTLP gRPC
       - "4318:4318"   # OTLP HTTP
       - "8889:8889"   # Prometheus metrics
+    depends_on:
+      - tempo
+      - jaeger
+      - loki
+      - prometheus
+      
+  tempo:
+    image: grafana/tempo:latest
+    command: ["-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
 
   jaeger:
     image: jaegertracing/all-in-one:1.54
