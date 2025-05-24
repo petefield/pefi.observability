@@ -30,6 +30,7 @@ services:
 
   tempo-query-frontend:
     image: grafana/tempo:latest
+    container_name: tempo-query-frontend
     command: ["-target=query-frontend", "-config.file=/etc/tempo.yaml"]
     volumes:
       - ./tempo/tempo.yaml:/etc/tempo.yaml
