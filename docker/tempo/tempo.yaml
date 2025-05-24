@@ -1,6 +1,6 @@
 server:
   http_listen_port: 3200
-  grpc_listen_port: 4317  # Explicitly set gRPC port
+  grpc_listen_port: 4377  # Explicitly set gRPC port
   grpc_server_max_recv_msg_size: 4194304  # 4MB
   grpc_server_max_send_msg_size: 4194304  # 4MB
 
@@ -9,7 +9,7 @@ distributor:
     otlp:
       protocols:
         grpc: 
-          endpoint: "0.0.0.0:4317"  # Explicit binding
+          endpoint: "0.0.0.0:4377"  # Explicit binding
         http: {}
 
 storage:
