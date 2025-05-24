@@ -20,7 +20,7 @@ exporters:
     endpoint: "0.0.0.0:8889"
 
   otlp/tempo:
-    endpoint: "tempo:9095"
+    endpoint: "tempo:4317"
     tls:
       insecure: true
 
