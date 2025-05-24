@@ -24,3 +24,10 @@ storage:
     backend: local
     local:
       path: /tmp/tempo
+      # Explicitly create these subdirectories
+      block:
+        path: /tmp/tempo/blocks
+      wal:
+        path: /tmp/tempo/wal
+    pool:
+      max_workers: 20

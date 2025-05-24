@@ -20,7 +20,8 @@ services:
     container_name: tempo
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
-      - ./tempo.yaml:/etc/tempo.yaml
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+      - tempo-data:/tmp/tempo  # Add this line
     ports:
       - "3200:3200"  # UI
     healthcheck:
@@ -71,6 +72,5 @@ services:
       - tempo
       - loki
 
-
 volumes:
-  grafana-storage:
+  tempo-data:  # Add this at bottom
