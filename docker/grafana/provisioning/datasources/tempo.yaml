@@ -4,6 +4,6 @@ datasources:
   - name: Tempo
     type: tempo
     access: proxy
-    url: http://tempo:3200
+    url: http://tempo-query-frontend:9095  # Changed to query frontend
     version: 1
     editable: true

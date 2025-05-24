@@ -1,7 +1,5 @@
 server:
   http_listen_port: 3200
-  grpc_server_max_recv_msg_size: 4194304  # 4MB
-  grpc_server_max_send_msg_size: 4194304  # 4MB
 
 distributor:
   receivers:
@@ -14,11 +12,12 @@ distributor:
 
 querier:
   frontend_worker:
-    frontend_address: "tempo:9095"
+    frontend_address: "tempo-query-frontend:9095"
+    parallelism: 2
 
 query_frontend:
   search:
-    concurrent_jobs: 10
+    concurrent_jobs: 5
 
 storage:
   trace:

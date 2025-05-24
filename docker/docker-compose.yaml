@@ -18,11 +18,27 @@ services:
   tempo:
     image: grafana/tempo:latest
     container_name: tempo
-    ports:
-      - "3200:3200" # Tempo UI
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
+      - ./tempo.yaml:/etc/tempo.yaml
+    ports:
+      - "3200:3200"  # UI
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3200/ready"]
+      interval: 5s
+    volumes:
       - ./tempo/tempo.yaml:/etc/tempo.yaml
+
+  tempo-query-frontend:
+    image: grafana/tempo:latest
+    command: ["-target=query-frontend", "-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+    ports:
+      - "9095:9095"
+    depends_on:
+      - tempo
+
 
   loki:
     image: grafana/loki:latest
