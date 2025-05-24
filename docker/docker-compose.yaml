@@ -41,8 +41,6 @@ services:
       - ./tempo/tempo.yaml:/etc/tempo.yaml
     depends_on:
       - tempo-query-frontend
-    networks:
-      - observability
 
   loki:
     image: grafana/loki:latest
