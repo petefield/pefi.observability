@@ -11,6 +11,18 @@ distributor:
           endpoint: "0.0.0.0:4317"  # Explicit binding
         http: {}
 
+querier:
+  frontend_worker:
+    frontend_address: "tempo-query-frontend:9095"  # Add this section
+  search:
+    enabled: true
+
+query_frontend:
+  search:
+    concurrent_jobs: 20
+    max_duration: 30m
+
+
 storage:
   trace:
     backend: local

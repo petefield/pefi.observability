@@ -24,6 +24,16 @@ services:
     volumes:
       - ./tempo/tempo.yaml:/etc/tempo.yaml
 
+  tempo-query-frontend:
+    image: grafana/tempo:latest
+    command: ["-target=query-frontend", "-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+    ports:
+      - "9095:9095"
+    depends_on:
+      - tempo
+
   loki:
     image: grafana/loki:latest
     container_name: loki
