@@ -5,10 +5,8 @@ distributor:
   receivers:
     otlp:
       protocols:
-        grpc:
-          - endpoint: "0.0.0.0:9095"
-
-        http:
+        grpc: {}
+        http: {}
 
 storage:
   trace:
