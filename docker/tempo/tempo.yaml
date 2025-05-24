@@ -23,11 +23,4 @@ storage:
   trace:
     backend: local
     local:
-      path: /tmp/tempo
-      # Explicitly create these subdirectories
-      block:
-        path: /tmp/tempo/blocks
-      wal:
-        path: /tmp/tempo/wal
-    pool:
-      max_workers: 20
+      path: /tmp/tempo  # All files will be created under this directory

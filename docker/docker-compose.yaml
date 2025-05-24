@@ -27,8 +27,6 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3200/ready"]
       interval: 5s
-    volumes:
-      - ./tempo/tempo.yaml:/etc/tempo.yaml
 
   tempo-query-frontend:
     image: grafana/tempo:latest
