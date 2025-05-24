@@ -11,10 +11,9 @@ distributor:
           endpoint: "0.0.0.0:4317"  # Explicit binding
         http: {}
 
-query_frontend:
-  search:
-    concurrent_jobs: 20
-    max_duration: 30m
+querier:
+  frontend_worker:
+    frontend_address: "tempo-query-frontend:9095"  # Only this line is needed
 
 
 storage:
