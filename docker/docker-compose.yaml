@@ -34,6 +34,16 @@ services:
     depends_on:
       - tempo
 
+  tempo-querier:
+    image: grafana/tempo:latest
+    command: ["-target=querier", "-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo/tempo.yaml:/etc/tempo.yaml
+    depends_on:
+      - tempo-query-frontend
+    networks:
+      - observability
+
   loki:
     image: grafana/loki:latest
     container_name: loki
