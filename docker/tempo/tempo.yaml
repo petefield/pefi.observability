@@ -11,18 +11,17 @@ distributor:
           endpoint: "0.0.0.0:4317"  # Explicit binding
         http: {}
 
+
 querier:
   frontend_worker:
-    frontend_address: "tempo-query-frontend:9095"  # Only this line is needed
+    frontend_address: "tempo:9095"
 
 query_frontend:
   search:
-    concurrent_jobs: 20
+    concurrent_jobs: 10
 
 storage:
   trace:
     backend: local
     local:
-      path: /tmp/tempo/blocks
-    wal:
-      path: /tmp/tempo/wal
+      path: /tmp/tempo
