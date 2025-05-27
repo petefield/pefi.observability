@@ -18,6 +18,7 @@ services:
   tempo:
     image: grafana/tempo:latest
     container_name: tempo
+    user: root
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
       - ./tempo/tempo.yaml:/etc/tempo.yaml
@@ -28,16 +29,6 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:3200/ready"]
       interval: 5s
 
-  tempo-query-frontend:
-    image: grafana/tempo:latest
-    container_name: tempo-query-frontend
-    command: ["-target=query-frontend", "-config.file=/etc/tempo.yaml"]
-    volumes:
-      - ./tempo/tempo.yaml:/etc/tempo.yaml
-    ports:
-      - "9095:9095"
-    depends_on:
-      - tempo
 
   loki:
     image: grafana/loki:latest
