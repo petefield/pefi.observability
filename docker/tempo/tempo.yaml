@@ -50,7 +50,7 @@ metrics_generator:
 overrides:
   defaults:
     metrics_generator:
-      processors: [service-graphs, span-metrics] # enables metrics generator
+      processors: [service-graphs, span-metrics, local-blocks] # enables metrics generator
         
 #overrides:
 #  per_tenant_override_config: /conf/overrides.yaml
