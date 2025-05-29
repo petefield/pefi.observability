@@ -4,12 +4,28 @@ using OpenTelemetry.Trace;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Logs;
 using System.Reflection;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace pefi.observability
 {
     public static class ServiceCollectionExtensions
     {
+        public static void AddPefiLogging(this ILoggingBuilder l)
+        {
+            var serviceName = Assembly.GetEntryAssembly().GetName().Name;
+
+            var resource = ResourceBuilder.CreateDefault().AddService(serviceName);
+
+            l.AddOpenTelemetry(loggerOptions =>
+            {
+                loggerOptions.SetResourceBuilder(resource);
+                loggerOptions.IncludeFormattedMessage = true;
+                loggerOptions.IncludeScopes = true;
+                loggerOptions.ParseStateValues = true;
+                loggerOptions.AddConsoleExporter();
+            });
+        }
+
         public static void AddPefiObservability(this IServiceCollection services, string endpoint)
         {
 
@@ -23,8 +39,9 @@ namespace pefi.observability
                     .AddHttpClientInstrumentation()
                     .AddOtlpExporter(o => o.Endpoint = new Uri(endpoint))
                     .AddConsoleExporter())
-                .WithLogging(l =>
-                    l.AddConsoleExporter()
+                .WithLogging(l => l
+                    .AddConsoleExporter()
+                    
                     .AddOtlpExporter(o => {
                         o.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
                         o.Endpoint = new Uri(endpoint);
