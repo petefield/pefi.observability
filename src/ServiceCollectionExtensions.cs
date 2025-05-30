@@ -26,7 +26,7 @@ namespace pefi.observability
             });
         }
 
-        public static void AddPefiObservability(this IServiceCollection services, string endpoint)
+        public static void AddPefiObservability(this IServiceCollection services, string endpoint, Action<TracerProviderBuilder>? tracing = null)
         {
 
             var serviceName = Assembly.GetEntryAssembly().GetName().Name;
@@ -34,11 +34,14 @@ namespace pefi.observability
 
             services.AddOpenTelemetry()
                 .ConfigureResource(r => r.AddService(serviceName, null, serviceVersion))
-                .WithTracing(t => t
-                    .AddAspNetCoreInstrumentation()
-                    .AddHttpClientInstrumentation()
-                    .AddOtlpExporter(o => o.Endpoint = new Uri(endpoint))
-                    .AddConsoleExporter())
+                .WithTracing(t => 
+                {
+                    t.AddAspNetCoreInstrumentation()
+                     .AddHttpClientInstrumentation()
+                     .AddOtlpExporter(o => o.Endpoint = new Uri(endpoint))
+                     .AddConsoleExporter();
+                    tracing?.Invoke(t);
+                })
                 .WithLogging(l => l
                     .AddConsoleExporter()
                     

@@ -1,4 +1,3 @@
-
 using pefi.observability;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddPefiObservability("http://192.168.0.5:4317");
 builder.Logging.AddPefiLogging();
 builder.Services.AddHttpClient();
-
 
 var app = builder.Build();
 
